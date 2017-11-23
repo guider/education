@@ -5,11 +5,11 @@
       <p>Question {{selectedIndex + 1}}</p>
     </div>
 
-    <i :style="{backgroundImage: 'url('+'/src/assets/image/level2/图片1.png'+')',
+    <i :style="{backgroundImage: 'url('+(fullImage)+')',
     }" style="background-position: -40px -20px;background-repeat: no-repeat;background-size: 125%;"></i>
 
-    <div v-for="item,index in list " style="display: flex;flex-direction: column;background-color: white;">
-      <cell :message="{item:item, index:index}" @onClick="onSelectClick(index)"></cell>
+    <div v-for="item,index in 2 " style="display: flex;flex-direction: column;background-color: white;">
+      <cell :message="{item:fullImage, index:index}" @onClick="onSelectClick(index)"></cell>
     </div>
 
     <div style="width: 100%;display: flex;">
@@ -29,15 +29,13 @@
     components: {Cell},
     data() {
       return {
-        selectedIndex: 0,
-        data: require('./config/' + (this.query && this.query.path ? this.query.path : 'level1') + '.js').default,
+        selectedIndex: 9,
         answer: []
       }
     },
     methods: {
       onSelectClick(index) {
-        console.log('onSelectClick ')
-        if (this.data.length - 1 > this.selectedIndex) {
+        if (11 > this.selectedIndex) {
           this.selectedIndex++;
         }
       },
@@ -48,15 +46,13 @@
 
     },
     computed: {
-      question() {
-        return this.data[this.selectedIndex].question;
-      },
-      list() {
-        return this.data[this.selectedIndex].options;
+      fullImage() {
+
+        return  require('../../../assets/image/level1/图片'+(this.selectedIndex+1)+'.png');
       }
     },
     mounted() {
-      this.$refs.container.parentNode.style.paddingBottom = 0;
+//      this.$refs.container.parentNode.style.paddingBottom = 0;
     }
   }
 </script>

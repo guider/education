@@ -1,21 +1,22 @@
 <template>
   <div class="container">
     <div @click="onSelect(message.index?'D':'A')">
-      <p>{{message.index?'D':'A'}}</p>
-      <i :style="{backgroundImage: 'url('+'/src/assets/image/level2/图片1.png'+')'}"
-         style="background-position: 2px 71.5%;background-repeat: no-repeat;background-size: 300%;"></i>
+      <p>{{message.index ? 'D' : 'A'}}</p>
+      <i
+        :style="{backgroundImage: 'url(' + bgImage+')',backgroundPosition:backgroundPosition(0)}"
+        style="background-repeat: no-repeat;background-size: 300%;"></i>
     </div>
     <div @click="onSelect(message.index?'E':'B')">
-      <p>{{message.index?'E':'B'}}</p>
-      <i :style="{backgroundImage: 'url('+'/src/assets/image/level2/图片1.png'+')'}"
-         style="background-position:48% 71.5%;background-repeat: no-repeat;background-size: 300%;"></i>
+      <p>{{message.index ? 'E' : 'B'}}</p>
+      <i
+        :style="{backgroundImage: 'url(' +bgImage+')',backgroundPosition:backgroundPosition(1)}"
+        style="background-repeat: no-repeat;background-size: 300%;"></i>
     </div>
     <div @click="onSelect(message.index?'F':'C')">
-      <p>{{message.index?'F':'C'}}</p>
-      <i :style="{backgroundImage: 'url('+'/src/assets/image/level2/图片1.png'+')'}"
-         style="background-position: 98% 71.5%;background-repeat: no-repeat;background-size: 300%;"></i>
-
-      <!--<img :src="(message.item[2])" alt=" ">-->
+      <p>{{message.index ? 'F' : 'C'}}</p>
+      <i
+        :style="{backgroundPosition:backgroundPosition(2),backgroundImage:'url('+bgImage+')'}"
+        style="background-repeat: no-repeat;background-size: 300%;"></i>
     </div>
 
   </div>
@@ -29,12 +30,26 @@
       return {}
     },
     methods: {
-      onSelect(item){
-        this.$emit('onClick',item)
+      onSelect(item) {
+        this.$emit('onClick', item)
+      },
+
+      backgroundPosition(index) {
+        if (!index) {
+          return this.message.index ? '2% 96%' : '2% 72%'
+        }
+        if (index == 1) {
+          return this.message.index ? '48% 96%' : '48% 72%'
+        }
+        if (index == 2) {
+          return this.message.index ? '97% 96%' : '97% 72%'
+        }
       }
     },
     computed: {
-
+      bgImage(){
+        return this.message.item;
+      }
     },
     mounted() {
     }
