@@ -5,7 +5,8 @@
       <p>Question {{selectedIndex + 1}}</p>
     </div>
 
-    <img :src="(question)" alt=" ">
+    <i :style="{backgroundImage: 'url('+'/src/assets/image/level2/图片1.png'+')',
+    }" style="background-position: -40px -20px;background-repeat: no-repeat;background-size: 125%;"></i>
 
     <div v-for="item,index in list " style="display: flex;flex-direction: column;background-color: white;">
       <cell :message="{item:item, index:index}" @onClick="onSelectClick(index)"></cell>
@@ -70,10 +71,12 @@
 
   }
 
-  img {
+  i{
     width: 90%;
     height: 55.6vw;
     align-self: center;
+    object-fit: cover;
+    top: 20px;
   }
 
   p {

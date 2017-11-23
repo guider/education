@@ -2,15 +2,20 @@
   <div class="container">
     <div @click="onSelect(message.index?'D':'A')">
       <p>{{message.index?'D':'A'}}</p>
-      <img :src="(message.item[0])" alt=" ">
+      <i :style="{backgroundImage: 'url('+'/src/assets/image/level2/图片1.png'+')'}"
+         style="background-position: 2px 71.5%;background-repeat: no-repeat;background-size: 300%;"></i>
     </div>
     <div @click="onSelect(message.index?'E':'B')">
       <p>{{message.index?'E':'B'}}</p>
-      <img :src="(message.item[1])" alt=" ">
+      <i :style="{backgroundImage: 'url('+'/src/assets/image/level2/图片1.png'+')'}"
+         style="background-position:48% 71.5%;background-repeat: no-repeat;background-size: 300%;"></i>
     </div>
     <div @click="onSelect(message.index?'F':'C')">
       <p>{{message.index?'F':'C'}}</p>
-      <img :src="(message.item[2])" alt=" ">
+      <i :style="{backgroundImage: 'url('+'/src/assets/image/level2/图片1.png'+')'}"
+         style="background-position: 98% 71.5%;background-repeat: no-repeat;background-size: 300%;"></i>
+
+      <!--<img :src="(message.item[2])" alt=" ">-->
     </div>
 
   </div>
@@ -25,7 +30,6 @@
     },
     methods: {
       onSelect(item){
-        console.log(item)
         this.$emit('onClick',item)
       }
     },
@@ -43,8 +47,10 @@
     display: flex;
     background-color: white;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
+    margin-left: 5%;
+    margin-right: 5%;
 
   }
 
@@ -57,9 +63,10 @@
     text-align: center;
   }
 
-  img {
+  i {
     width: 100px;
-    height: 60px;
+    height: 50px;
+    display: block;
     overflow: hidden;
     object-fit: cover;
   }
