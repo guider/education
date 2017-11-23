@@ -6,6 +6,9 @@ import TestHome from '../pages/activity/test/TestHome.vue'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
+  base: '/',
+  saveScrollPosition: true,
   routes: [
     {
       path: '/',
@@ -17,7 +20,7 @@ export default new Router({
     },
 
     {
-      path: '/',
+      path: '/:level',
       name: '测试',
       component: TestHome,
       meta: {

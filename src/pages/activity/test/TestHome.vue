@@ -9,7 +9,7 @@
     }" style="background-position: -40px -20px;background-repeat: no-repeat;background-size: 125%;"></i>
 
     <div v-for="item,index in 2 " style="display: flex;flex-direction: column;background-color: white;">
-      <cell :message="{item:fullImage, index:index}" @onClick="onSelectClick(index)"></cell>
+      <cell :message="{item:fullImage, index:index,level:level}" @onClick="onSelectClick(index)"></cell>
     </div>
 
     <div style="width: 100%;display: flex;">
@@ -29,7 +29,7 @@
     components: {Cell},
     data() {
       return {
-        selectedIndex: 9,
+        selectedIndex: 0,
         answer: []
       }
     },
@@ -47,12 +47,14 @@
     },
     computed: {
       fullImage() {
-
-        return  require('../../../assets/image/level1/图片'+(this.selectedIndex+1)+'.png');
+        return  require('../../../assets/image/level'+ this.level+'/图片'+(this.selectedIndex+1)+'.png');
+      },
+      level(){
+        return  (this.$route.params &&this.$route.params.level )? this.$route.params.level:1;
       }
     },
     mounted() {
-//      this.$refs.container.parentNode.style.paddingBottom = 0;
+      this.$refs.container.parentNode.style.paddingBottom = 0;
     }
   }
 </script>
