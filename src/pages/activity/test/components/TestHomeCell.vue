@@ -46,13 +46,13 @@
         if (parseInt(this.level) < 4) {
 
           if (!index) {
-            return this.message.index ? '-2% 96%' : '-2% 70%'
+            return this.message.index ? '-2% 97%' : '-2% 70%'
           }
           if (index == 1) {
-            return this.message.index ? '48% 96%' : '48% 70%'
+            return this.message.index ? '48% 97%' : '48% 70%'
           }
           if (index == 2) {
-            return this.message.index ? '97% 96%' : '97% 70%'
+            return this.message.index ? '97% 97%' : '97% 70%'
           }
         } else {
           if (!index) {
@@ -112,7 +112,7 @@
     background-repeat: no-repeat;
     background-size: 300%;
     width: 100px;
-    height: 50px;
+    height: 60px;
     display: block;
     overflow: hidden;
     object-fit: cover;
