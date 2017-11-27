@@ -44,6 +44,7 @@
     "file-loader": "^1.1.4",
     "friendly-errors-webpack-plugin": "^1.6.1",
     "gulp": "^3.9.1",
+    "gulp-font-spider": "^0.3.6",
     "gulp-sftp": "^0.1.5",
     "gulp-ssh": "^0.6.0",
     "gulp-tinypng-nokey": "^1.1.0",

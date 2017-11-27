@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'cyhtz';
-  src: url('font/CYHTZ.ttf');
+  src: url('../../static/font/CYHTZ.ttf');
 }
 @font-face {
   font-family: 'fztcghjw';
-  src: url('font/FZTCGHJW_0.TTF');
+  src: url('../../static/font/FZTCGHJW_0.TTF');
 }
 @font-face {
 }

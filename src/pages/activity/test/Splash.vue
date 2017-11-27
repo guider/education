@@ -1,20 +1,9 @@
 <template>
   <div class="container" ref="container">
-    <div style="background-color: #1c72ea;border-radius: 40px;	width: 179px;height: 42px;text-align: center;	letter-spacing: 0px;
-	color: #ffffff;font-size: 30px;display:flex;justify-content: center;align-items: center;margin-top: 120px;font-family: fztcghjw;">
-      8岁儿童
+    <div class="title">
+      {{selectOption}}儿童
     </div>
-
-    <div style="
-    font-family: cyhtz;
-	font-size: 38px;
-	margin-top: 10px;
-	font-weight: normal;
-	font-stretch: normal;
-	line-height: 40px;
-	letter-spacing: 0px;
-	color: #1c72ea;
-">逻辑推理题
+    <div class="subtitle">逻辑推理测试题
     </div>
     <div style="flex: 1;"></div>
 
@@ -27,8 +16,7 @@
     </p>
     <div style="flex: 1;"></div>
 
-    <div class="button"></div>
-
+    <div class="button" @click="level"></div>
 
     <div style="flex: 1;"></div>
     <img src="../../../assets/image/icon/智力测试题1.png">
@@ -51,23 +39,29 @@
     },
     data() {
       return {
-        selectOption: '',
+        selectOption: '3-6岁',
         selectIndex: 1,
-        options: ['3-6周岁', '7-8周岁', '9-10周岁', '11-12周岁', '13-14周岁', '15岁以上']
+        options: ['3-6岁', '7-8岁', '9-10岁', '11-12岁', '13-14岁', '15岁以上']
       }
     },
     methods: {
       onPopHide() {
         this.selectIndex = this.options.indexOf(this.selectOption) > 0 ? this.options.indexOf(this.selectOption) : 1;
         cookie.set('age', this.selectOption);
+      },
+      level() {
+        this.$router.push('/level/' + this.selectIndex);
       }
     },
     computed: {},
     mounted() {
       this.$refs.container.parentNode.style.paddingBottom = 0;
       let age = cookie.get('age', '');
-      if (!age || this.options.indexOf(age) < 0) {
+      if (!age || this.options.indexOf(age) < 0 || true) {
         this.$refs.pop.show();
+      }else {
+        this.selectedIndex = this.options.indexOf(age) +1;
+        this.selectOption = age;
       }
     }
   }
@@ -85,8 +79,25 @@
     background-image: url("../../../assets/image/icon/智力测试题背景.jpg");
   }
 
-  .desc {
+  .title {
+    background-color: #1c72ea;
+    border-radius: 40px;
+    padding-left: 10px;
+    padding-right: 10px;
+    min-width: 179px;
+    height: 42px;
+    text-align: center;
+    letter-spacing: 0px;
+    color: #ffffff;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 120px;
     font-family: fztcghjw;
+  }
+
+  .desc {
     font-size: 15px;
     font-weight: normal;
     font-stretch: normal;
@@ -96,6 +107,17 @@
     letter-spacing: 0px;
     line-height: 28px;
     color: #333333;
+  }
+
+  .subtitle {
+    font-family: cyhtz;
+    font-size: 38px;
+    margin-top: 10px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 40px;
+    letter-spacing: 0px;
+    color: #1c72ea;
   }
 
   span {

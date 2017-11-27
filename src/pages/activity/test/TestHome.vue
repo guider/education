@@ -9,13 +9,15 @@
     }" style="background-position: -40px -20px;background-repeat: no-repeat;background-size: 125%;"></i>
 
     <div v-for="item,index in 2 " style="display: flex;flex-direction: column;background-color: white;">
-      <cell :message="{item:fullImage, index:index,level:level}" @onClick="onSelectClick(index)"></cell>
+      <cell :message="{item:fullImage, index:index,level:level}" @onClick="onSelectClick"></cell>
     </div>
 
     <div style="width: 100%;display: flex;">
       <p
         style="font-size: 14px;text-align: left;margin-left: 40px;padding: 0px 10px;color: #78b7fd;
          border-radius: 12px;border: solid 1px #78b7fd;" @click="onBackClick">上一题</p>
+      <p style="flex: 1;"></p>
+
     </div>
 
   </div>
@@ -36,7 +38,12 @@
     methods: {
       onSelectClick(index) {
         if (11 > this.selectedIndex) {
+          this.answer[this.selectedIndex] = index;
           this.selectedIndex++;
+        } else {
+          this.answer[this.selectedIndex] = index;
+          this.selectedIndex++;
+          this.$router.push({path: '/result', query: {level: this.level, answer: this.answer}})
         }
       },
       onBackClick() {
@@ -47,10 +54,10 @@
     },
     computed: {
       fullImage() {
-        return  require('../../../assets/image/level'+ this.level+'/图片'+(this.selectedIndex+1)+'.png');
+        return require('../../../assets/image/level' + this.level + '/图片' + (this.selectedIndex + 1) + '.png');
       },
-      level(){
-        return  (this.$route.params &&this.$route.params.level )? this.$route.params.level:1;
+      level() {
+        return (this.$route.params && this.$route.params.level ) ? this.$route.params.level : 1;
       }
     },
     mounted() {
@@ -69,7 +76,7 @@
 
   }
 
-  i{
+  i {
     width: 90%;
     height: 55.6vw;
     align-self: center;
