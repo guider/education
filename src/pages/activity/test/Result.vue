@@ -1,39 +1,44 @@
 <template>
-  <div class="container" ref="container">
-    <div style="flex: 14;"></div>
-    <p class="title">
-      恭喜你，答对{{score}}道题!
-    </p>
-    <p class="subtitle">你的才华可以胜任</p>
+  <div ref="container" style="width: 100%;height: 100%;position: static">
+    <div class="container"   style="height: 100%;">
+      <div style="flex: 14;"></div>
+      <p class="title">
+        恭喜你，答对{{score}}道题!
+      </p>
+      <p class="subtitle">你的才华可以胜任</p>
 
-    <p class="desc">
-      <span style="font-size: 39px;">[&nbsp;</span>内阁大学士<span style="font-size: 39px;">&nbsp;]</span>
-    </p>
-    <div style="flex: 18;"></div>
+      <p class="desc">
+        <span style="font-size: 39px;">[&nbsp;</span>{{resultRate}}<span style="font-size: 39px;">&nbsp;]</span>
+      </p>
+      <div style="flex: 18;"></div>
 
-    <div style="display: flex;width: 100%;justify-content: space-around">
-      <div class="button2" @click="newLevel"></div>
-      <div class="button" @click="share"></div>
-    </div>
+      <div style="display: flex;width: 100%;justify-content: space-around">
+        <div class="button2" @click="newLevel"></div>
+        <div class="button" @click="share"></div>
+      </div>
 
-    <div style="flex: 12;"></div>
+      <div style="flex: 12;"></div>
 
-    <img style="	width: 115px;height: 115px;"
-         src="../../../assets/image/icon/qrcode.jpg"/>
-    <p
-      style="	font-size: 14px; line-height: 20px; margin: -5px;
+      <img style="	width: 115px;height: 115px;"
+           src="../../../assets/image/icon/qrcode.jpg"/>
+      <p
+        style="	font-size: 14px; line-height: 20px; margin: -5px;
          font-weight: normal;	font-stretch: normal;	letter-spacing: 0px;color: #666666;">
-      更多精彩测评戳这里
+        更多精彩测评戳这里
 
-    </p>
+      </p>
 
-    <div style="flex: 6;"></div>
+      <div style="flex: 6;"></div>
 
-
-    <div v-show="showShare" style="position: fixed;width: 100%;height: 100%;background-color: rgba(0,0,0,0.7);" @click="hideShare">
-      <div style="width: 100%;height: 100%;display: flex;justify-content: center;flex-direction: column;align-items: center;">
+    </div>
+    <div v-show="showShare"
+         style="position: absolute;width: 100%;height: 100%;background-color: rgba(0,0,0,0.7);top: 0;right: 0"
+         @click="hideShare">
+      <div
+        style="width: 100%;height: 100%;display: flex;justify-content: center;flex-direction: column;align-items: center;">
         <div style="width: 200px;height: 100%;display: flex;justify-content: center;flex-direction: column;">
-          <img style="width: 75px; height: 55px;align-self: flex-end;margin-right: 30px;" src="../../../assets/image/icon/箭头@2x.png" alt="">
+          <img style="width: 75px; height: 55px;align-self: flex-end;margin-right: 30px;"
+               src="../../../assets/image/icon/箭头@2x.png" alt="">
           <p class="share_desc" style="margin-top: 40px;margin-bottom: 20px;">1.点击右上角分享到朋友圈</p>
           <p class="share_desc" style="margin-bottom: 100px;">2.截图分享到朋友圈</p>
         </div>
@@ -51,7 +56,22 @@
     components: {Qrcode},
     data() {
       return {
-        showShare:false
+        showShare: false,
+        rate: {
+          12: '正一品太师',
+          11: '正二品太子少师',
+          10: '正三品大理寺卿',
+          9: '正四品大理寺少卿',
+          8: '正五品翰林院侍读',
+          7: '正六品内阁侍读',
+          6: '正七品顺天府教授',
+          5: '从七品内阁中书',
+          4: '正八品太医院御医',
+          3: '从八品翰林院典簿',
+          2: '九品芝麻官',
+          1: '九品芝麻官',
+          0: '九品芝麻官'
+        }
       }
     },
     methods: {
@@ -59,13 +79,16 @@
         this.$router.push('/level/' + (1 * this.$route.query.level + 1))
       },
       share() {
-        this.showShare =true;
+        this.showShare = true;
       },
-      hideShare(){
-        this.showShare=false;
+      hideShare() {
+        this.showShare = false;
       }
     },
     computed: {
+      resultRate() {
+        return this.rate[this.score]
+      },
       score() {
         let result = 0;
         this.$route.query.answer.forEach((item, index) => {

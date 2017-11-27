@@ -1,8 +1,8 @@
 <template>
   <div class="item-container" ref="container">
 
-    <div>
-      <p>Question {{selectedIndex + 1}}</p>
+    <div style="display: flex;justify-content: center;">
+      <p class="question">Question {{selectedIndex + 1}}</p>
     </div>
 
     <i :style="{backgroundImage: 'url('+(fullImage)+')',
@@ -12,14 +12,22 @@
       <cell :message="{item:fullImage, index:index,level:level}" @onClick="onSelectClick"></cell>
     </div>
 
+
+    <div style="flex: 1;"></div>
     <div style="width: 100%;display: flex;">
       <p
-        style="font-size: 14px;text-align: left;margin-left: 40px;padding: 0px 10px;color: #78b7fd;
-         border-radius: 12px;border: solid 1px #78b7fd;" @click="onBackClick">上一题</p>
-      <p style="flex: 1;"></p>
-
+        style="display: flex;justify-content: center;align-items: center;font-size: 14px;margin-left: 20px;text-align:center;padding: 0px 10px;color: #217dfd;line-height: 22px;"
+        @click="onBackClick">
+        <img src="../../../assets/image/icon/返回.png" style="width: 20px;height: 20px;" alt=" ">
+        上一题
+      </p>
+      <!--<p-->
+        <!--style="display: flex;justify-content: center;align-items: center;font-size: 14px;margin-left: 0px;text-align:center;padding: 0px 10px;color: #217dfd;line-height: 22px;"-->
+        <!--@click="onChangeLevel">-->
+        <!--<img src="../../../assets/image/icon/关卡.png" style="width: 20px;height: 20px;" alt=" ">-->
+        <!--更换关卡-->
+      <!--</p>-->
     </div>
-
   </div>
 </template>
 
@@ -50,6 +58,9 @@
         if (this.selectedIndex > 0)
           this.selectedIndex--;
       },
+      onChangeLevel() {
+        this.push()
+      }
 
     },
     computed: {
@@ -90,10 +101,22 @@
     text-align: center;
     font-stretch: normal;
     align-self: center;
-    margin-top: 40px;
+    margin-top: 30px;
     line-height: 23px;
     letter-spacing: 0px;
     color: #217dfd;
     margin-bottom: 20px;
+  }
+
+  .question {
+    background-image: url("../../../assets/image/icon/圆角矩形9@2x.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    display: flex;
+    width: 200px;
+    align-items: flex-end;
+    justify-content: center;
+    height: 34px;
+
   }
 </style>
