@@ -1,6 +1,9 @@
 <template>
   <div class="container" ref="container">
-    <div class="title">
+
+    <p style="font-family:fztcghjw; margin-top: 60px;font-size: 14px;font-weight: normal;font-stretch: normal;line-height: 7px;letter-spacing: 0px;color: #072d5d;"
+    >THE INTELLIGENCE TEST</p>
+    <div class="title" @click="choiceLevel">
       {{selectOption}}儿童
     </div>
     <div class="subtitle">逻辑推理测试题
@@ -39,18 +42,22 @@
     },
     data() {
       return {
-        selectOption: '3-6岁',
+        selectOption: '',
         selectIndex: 1,
         options: ['3-6岁', '7-8岁', '9-10岁', '11-12岁', '13-14岁', '15岁以上']
       }
     },
     methods: {
       onPopHide() {
+        this.selectOption='3-6岁';
         this.selectIndex = this.options.indexOf(this.selectOption) > 0 ? this.options.indexOf(this.selectOption) : 1;
         cookie.set('age', this.selectOption);
       },
       level() {
         this.$router.push('/level/' + this.selectIndex);
+      },
+      choiceLevel() {
+        this.$refs.pop.show();
       }
     },
     computed: {},
@@ -59,8 +66,8 @@
       let age = cookie.get('age', '');
       if (!age || this.options.indexOf(age) < 0 || true) {
         this.$refs.pop.show();
-      }else {
-        this.selectedIndex = this.options.indexOf(age) +1;
+      } else {
+        this.selectedIndex = this.options.indexOf(age) + 1;
         this.selectOption = age;
       }
     }
@@ -93,7 +100,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 120px;
+    margin-top: 25px;
     font-family: fztcghjw;
   }
 

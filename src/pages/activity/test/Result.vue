@@ -18,8 +18,8 @@
 
     <div style="flex: 12;"></div>
 
-    <qrcode style="	width: 160px;height: 160px; transform: scale(0.8)"
-            value="src/assets/image/icon/qrcode.jpg"></qrcode>
+    <img style="	width: 115px;height: 115px;"
+         src="../../../assets/image/icon/qrcode.jpg"/>
     <p
       style="	font-size: 14px; line-height: 20px; margin: -5px;
          font-weight: normal;	font-stretch: normal;	letter-spacing: 0px;color: #666666;">
@@ -29,6 +29,16 @@
 
     <div style="flex: 6;"></div>
 
+
+    <div v-show="showShare" style="position: fixed;width: 100%;height: 100%;background-color: rgba(0,0,0,0.7);" @click="hideShare">
+      <div style="width: 100%;height: 100%;display: flex;justify-content: center;flex-direction: column;align-items: center;">
+        <div style="width: 200px;height: 100%;display: flex;justify-content: center;flex-direction: column;">
+          <img style="width: 75px; height: 55px;align-self: flex-end;margin-right: 30px;" src="../../../assets/image/icon/箭头@2x.png" alt="">
+          <p class="share_desc" style="margin-top: 40px;margin-bottom: 20px;">1.点击右上角分享到朋友圈</p>
+          <p class="share_desc" style="margin-bottom: 100px;">2.截图分享到朋友圈</p>
+        </div>
+      </div>
+    </div>
 
   </div>
 
@@ -40,14 +50,19 @@
   export default {
     components: {Qrcode},
     data() {
-      return {}
+      return {
+        showShare:false
+      }
     },
     methods: {
       newLevel() {
         this.$router.push('/level/' + (1 * this.$route.query.level + 1))
       },
       share() {
-
+        this.showShare =true;
+      },
+      hideShare(){
+        this.showShare=false;
       }
     },
     computed: {
@@ -144,4 +159,13 @@
     color: #fd631f;
   }
 
+  .share_desc {
+    font-family: fztcghjw;
+    font-size: 15px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 24px;
+    letter-spacing: 0px;
+    color: #ffffff;
+  }
 </style>
