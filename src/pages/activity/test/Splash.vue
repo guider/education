@@ -1,7 +1,8 @@
 <template>
   <div class="container" ref="container">
 
-    <p style="font-family:fztcghjw; margin-top: 60px;font-size: 14px;font-weight: normal;font-stretch: normal;line-height: 7px;letter-spacing: 0px;color: #072d5d;"
+    <p
+      style="font-family:fztcghjw; margin-top: 16vw;font-size: 14px;font-weight: normal;font-stretch: normal;line-height: 7px;letter-spacing: 0px;color: #072d5d;"
     >THE INTELLIGENCE TEST</p>
     <div class="title" @click="choiceLevel">
       {{selectOption}}儿童
@@ -49,9 +50,12 @@
     },
     methods: {
       onPopHide() {
-        this.selectOption='3-6岁';
+        if (!this.selectOption) {
+          this.selectOption = '3-6岁'
+        }
         this.selectIndex = this.options.indexOf(this.selectOption) > 0 ? this.options.indexOf(this.selectOption) : 1;
         cookie.set('age', this.selectOption);
+
       },
       level() {
         this.$router.push('/level/' + this.selectIndex);
@@ -92,7 +96,7 @@
     padding-left: 10px;
     padding-right: 10px;
     min-width: 179px;
-    height: 42px;
+    height: 40px;
     text-align: center;
     letter-spacing: 0px;
     color: #ffffff;
@@ -112,7 +116,7 @@
     width: 90%;
     text-align: center;
     letter-spacing: 0px;
-    line-height: 28px;
+    line-height: 20px;
     color: #333333;
   }
 
@@ -146,8 +150,8 @@
   }
 
   img {
-    width: 207px;
-    height: 191px;
+    width: 55.3vw;
+    height: 51vw;
   }
 
   .demo3-slot {

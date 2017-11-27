@@ -13,12 +13,14 @@ import {LoadingPlugin, ToastPlugin, AlertPlugin} from 'vux'
 // axios.defaults.baseURL = 'http://localhost:7890/';
 axios.defaults.baseURL = '/api';
 import VueScroller from 'vue-scroller'
+import { WechatPlugin } from 'vux'
 
 
 Vue.use(LoadingPlugin);
 Vue.use(ToastPlugin);
 Vue.use(AlertPlugin);
 Vue.use(VueScroller);
+Vue.use(WechatPlugin)
 /* ----------- Config ---------- */
 Vue.config.productionTip = true;
 
