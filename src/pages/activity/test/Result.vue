@@ -212,6 +212,7 @@
       },
       score() {
         let result = 0;
+        console.log( this.resultArray )
         this.$route.query.answer.forEach((item, index) => {
           if (item == this.resultArray[index]) {
             result++;
@@ -220,14 +221,11 @@
         return result;
       },
       resultArray() {
-        return Array.from(require('./config/result').default[this.$route.query.level]);
+        return Array.from(require('./config/result').default[this.$route.query.level*1-1]);
       }
     },
     mounted() {
       this.$refs.container.parentNode.style.paddingBottom = 0;
-
-      console.log()
-
     }
   }
 </script>

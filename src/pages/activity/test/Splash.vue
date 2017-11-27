@@ -53,12 +53,12 @@
         if (!this.selectOption) {
           this.selectOption = '3-6岁'
         }
-        this.selectIndex = this.options.indexOf(this.selectOption) > 0 ? this.options.indexOf(this.selectOption) : 1;
+        this.selectIndex = this.options.indexOf(this.selectOption) >= 0 ? this.options.indexOf(this.selectOption) : 1;
         cookie.set('age', this.selectOption);
 
       },
       level() {
-        this.$router.push('/level/' + this.selectIndex);
+        this.$router.push('/level/' + ( this.selectIndex*1+1));
       },
       choiceLevel() {
         this.$refs.pop.show();
