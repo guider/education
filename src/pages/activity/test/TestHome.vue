@@ -5,8 +5,8 @@
       <p class="question">Question {{selectedIndex + 1}}</p>
     </div>
 
-    <i :style="{backgroundImage: 'url('+(fullImage)+')',
-    }" style="background-position: -40px -20px;background-repeat: no-repeat;background-size: 125%;"></i>
+    <i :style="{backgroundImage: 'url('+(fullImage)+')'}"
+       style="background-position: -40px -20px;background-repeat: no-repeat;background-size: 125%;"></i>
 
     <div v-for="item,index in 2 " style="display: flex;flex-direction: column;background-color: white;">
       <cell :message="{item:fullImage, index:index,level:level}" @onClick="onSelectClick"></cell>

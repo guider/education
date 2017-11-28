@@ -212,7 +212,6 @@
       },
       score() {
         let result = 0;
-        console.log( this.resultArray )
         this.$route.query.answer.forEach((item, index) => {
           if (item == this.resultArray[index]) {
             result++;

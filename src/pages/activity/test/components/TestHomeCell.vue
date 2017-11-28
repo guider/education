@@ -1,25 +1,25 @@
 <template>
   <div class="container">
-    <div @click="onSelect(message.index?'D':'A')">
-      <p>{{message.index ? 'D' : 'A'}}</p>
+    <div @click="onSelect(message.index?(bigLevel ? 'E':'D'):'A')">
+      <p>{{message.index ? (bigLevel ? 'E':'D') : 'A'}}</p>
       <i
         :style="{backgroundImage: 'url(' + bgImage+')',backgroundPosition:backgroundPosition(0),width:optionWith,
         backgroundSize: level<4 ?'300%':'400%'}"></i>
     </div>
-    <div @click="onSelect(message.index?'E':'B')">
-      <p>{{message.index ? 'E' : 'B'}}</p>
+    <div @click="onSelect(message.index? (bigLevel ? 'F':'E'):'B')">
+      <p>{{message.index ?  (bigLevel ? 'F':'E') : 'B'}}</p>
       <i
         :style="{backgroundImage: 'url(' +bgImage+')',backgroundPosition:backgroundPosition(1),width:optionWith,
         backgroundSize: level<4 ?'300%':'400%'}"></i>
     </div>
-    <div @click="onSelect(message.index?'F':'C')">
-      <p>{{message.index ? 'F' : 'C'}}</p>
+    <div @click="onSelect(message.index? (bigLevel ? 'G':'F'):'C')">
+      <p>{{message.index ? (bigLevel ? 'G':'F'): 'C'}}</p>
       <i
         :style="{backgroundPosition:backgroundPosition(2),backgroundImage:'url('+bgImage+')',width:optionWith,
          backgroundSize: level<4 ?'300%':'400%'}"></i>
     </div>
-    <div @click="onSelect(message.index?'F':'C')" v-if="level>=4">
-      <p>{{message.index ? 'F' : 'C'}}</p>
+    <div @click="onSelect(message.index?'H':'D')" v-if="level>=4">
+      <p>{{message.index ? 'H' : 'D'}}</p>
       <i
         :style="{backgroundPosition:backgroundPosition(3),backgroundImage:'url('+bgImage+')',width:optionWith}"
         style="background-size: 400%;"></i>
@@ -40,8 +40,8 @@
         this.$emit('onClick', item)
       },
 
-      backgroundPosition(index) {
 
+      backgroundPosition(index) {
 
         if (parseInt(this.level) < 4) {
 
@@ -77,9 +77,14 @@
       level() {
         return this.message.level;
       },
+      bigLevel() {
+        return parseInt(this.level) >= 4;
+      },
+
       optionWith() {
         return this.level < 4 ? '100px' : '75px';
       }
+
     },
     mounted() {
     }
