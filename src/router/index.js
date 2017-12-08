@@ -3,6 +3,9 @@ import Router from 'vue-router'
 import TestHome from '../pages/activity/test/TestHome.vue'
 import Splash from '../pages/activity/test/Splash.vue'
 import Result from '../pages/activity/test/Result.vue'
+import Letters from '../pages/activity/edu_resource/Letters.vue'
+import Letter from '../pages/letter/Letter.vue'
+import TestDadMom from '../pages/activity/test_dad_mom/TestDadMom.vue'
 
 Vue.use(Router)
 
@@ -18,9 +21,7 @@ export default new Router({
       meta: {
         navHidden: true,
       }
-    },
-
-    {
+    }, {
       path: '/level/:level',
       name: '测试',
       component: TestHome,
@@ -38,6 +39,27 @@ export default new Router({
       path: '/result',
       name: '评分',
       component: Result,
+      meta: {
+        navHidden: true,
+      }
+    }, {
+      path: '/letter',
+      name: '字典',
+      component: Letter,
+      meta: {
+        navHidden: true,
+      }
+    }, {
+      path: '/letters',
+      name: '读音',
+      component: Letters,
+      meta: {
+        navHidden: true,
+      }
+    }, {
+      path: '/test_dad_mom',
+      name: '读音',
+      component: TestDadMom,
       meta: {
         navHidden: true,
       }
