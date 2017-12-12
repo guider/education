@@ -55,32 +55,43 @@ let originalConfig = {
           name: utils.assetsPath('media/[name].[hash:7].[ext]')
         }
       },
+      // {
+      //   test: /\.(svg|eot|ttf|woff|woff2)$/,
+      //   use: 'file-loader',
+      //   options: {
+      //     name: 'images / [name].[hash].[ext]'
+      //   }
+      // },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         loader: 'url-loader',
-        options: {
-          limit: 10000,
-          name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
-        }
-      },
+        options:
+          {
+            limit: 10000,
+            name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
+          }
+      }
+      ,
       {
         test: /\.less$/,
-        use: [{
-          loader: "style-loader" // creates style nodes from JS strings
-        }, {
-          loader: "css-loader" // translates CSS into CommonJS
-        }, {
-          loader: "less-loader" // compiles Less to CSS
-        }]
+        use:
+          [{
+            loader: "style-loader" // creates style nodes from JS strings
+          },
+            {
+              loader: "css-loader" // translates CSS into CommonJS
+            }, {
+            loader: "less-loader" // compiles Less to CSS
+          }]
       }
     ]
   }
 }
 const vuxLoader = require('vux-loader')
 
-let lessTheme= {
-  name:'less-theme',
-  path:path.resolve(__dirname,'../src/assets/theme.less')
+let lessTheme = {
+  name: 'less-theme',
+  path: path.resolve(__dirname, '../src/assets/theme.less')
 }
 module.exports = vuxLoader.merge(originalConfig, {
   plugins: ['vux-ui']

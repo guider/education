@@ -32,7 +32,7 @@
           1.回复"合格"测试是不是合格的爸妈
         </li>
         <li>
-          2.回复"逻辑"测试孩子的逻辑推理能力
+          2.回复"靠谱"测试你是不是靠谱的父母
         </li>
       </ul>
       <div style="flex: 1;"></div>
@@ -243,6 +243,7 @@
     },
     mounted() {
       this.$refs.container.parentNode.style.paddingBottom = 0;
+      this.wxShare(this.$wechat, location.href);
     }
   }
 </script>

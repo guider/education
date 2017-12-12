@@ -12,14 +12,14 @@ Vue.use(Router);
 
 export default new Router({
   mode: 'history',
-  base: '/',
+  base: '/edu',
   saveScrollPosition: true,
   routes: [
     {
       path: '/',
       redirect: '/splash'
     }, {
-      path: '/level/:level',
+      path: '/level',
       name: '测试',
       component: TestHome,
       meta: {

@@ -68,10 +68,11 @@
         return require('../../../assets/image/level' + this.level + '/图片' + (this.selectedIndex + 1) + '.png');
       },
       level() {
-        return (this.$route.params && this.$route.params.level ) ? this.$route.params.level : 1;
+        return (this.$route.query && this.$route.query.level ) ? this.$route.query.level : 1;
       }
     },
     mounted() {
+      this.wxShare(this.$wechat, location.href);
       this.$refs.container.parentNode.style.paddingBottom = 0;
     }
   }

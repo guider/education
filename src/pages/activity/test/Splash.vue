@@ -58,7 +58,7 @@
 
       },
       level() {
-        this.$router.push('/level/' + ( this.selectIndex*1+1));
+        this.$router.push({path: '/level', query: {level: (this.selectIndex * 1 + 1)}});
       },
       choiceLevel() {
         this.$refs.pop.show();
@@ -74,6 +74,7 @@
         this.selectedIndex = this.options.indexOf(age) + 1;
         this.selectOption = age;
       }
+      this.wxShare(this.$wechat, location.href);
     }
   }
 </script>
