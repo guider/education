@@ -2,7 +2,7 @@
 
   <div class="container" ref="box">
 
-    <div style="    overflow: hidden;position: absolute;bottom: 10px;margin:auto;margin-left: 10px;">
+    <div v-if="state!==3" style="    overflow: hidden;position: absolute;bottom: 10px;margin:auto;margin-left: 10px;">
       <img src="../../../assets/image/test_dad_mom/底图@2x.png" alt="">
     </div>
 
@@ -61,6 +61,23 @@
       <p class="desc" style="font-size: 15px;margin-top: 0px;">
         {{result.comment}}
       </p>
+
+      <div style="flex: 10;"></div>
+      <img style="	width: 115px;height: 115px;"
+           src="../../../assets/image/icon/qrcode.jpg"/>
+      <div style="flex: 1;"></div>
+      <ul style="list-style: none;">
+        <li >
+          关注公众号:
+        </li>
+        <li>
+          1.回复"靠谱"测试是不是靠谱家长
+        </li>
+        <li>
+          2.回复"逻辑"测试孩子的逻辑推理能力
+        </li>
+      </ul>
+      <div style="flex: 2;"></div>
     </div>
 
   </div>

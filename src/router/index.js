@@ -8,20 +8,16 @@ import Letter from '../pages/letter/Letter.vue'
 import TestDadMom from '../pages/activity/test_dad_mom/TestDadMom.vue'
 import TestReliableParents from '../pages/activity/test_reliable_parents/TestReliableParents.vue'
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   mode: 'history',
-  base: '/edu',
+  base: '/',
   saveScrollPosition: true,
   routes: [
     {
       path: '/',
-      name: '首页',
-      component: Splash,
-      meta: {
-        navHidden: true,
-      }
+      redirect: '/splash'
     }, {
       path: '/level/:level',
       name: '测试',
@@ -73,9 +69,9 @@ export default new Router({
         navHidden: true,
       }
     }
-    // , {
-    //   path: '*',
-    //   redirect:'/splash'
-    // }
+    , {
+      path: '/*',
+      redirect: '/splash'
+    }
   ]
 })

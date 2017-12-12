@@ -19,14 +19,32 @@
 
       <div style="flex: 12;"></div>
 
+
+      <div style="flex: 5;"></div>
       <img style="	width: 115px;height: 115px;"
            src="../../../assets/image/icon/qrcode.jpg"/>
-      <p
-        style="	font-size: 14px; line-height: 20px; margin: -5px;
-         font-weight: normal;	font-stretch: normal;	letter-spacing: 0px;color: #666666;">
-        更多精彩测评戳这里
+      <div style="flex: 1;"></div>
+      <ul style="list-style: none;">
+        <li >
+          关注公众号:
+        </li>
+        <li>
+          1.回复"合格"测试是不是合格的爸妈
+        </li>
+        <li>
+          2.回复"逻辑"测试孩子的逻辑推理能力
+        </li>
+      </ul>
+      <div style="flex: 1;"></div>
 
-      </p>
+      <!--<img style="	width: 115px;height: 115px;"-->
+           <!--src="../../../assets/image/icon/qrcode.jpg"/>-->
+      <!--<p-->
+        <!--style="	font-size: 14px; line-height: 20px; margin: -5px;-->
+         <!--font-weight: normal;	font-stretch: normal;	letter-spacing: 0px;color: #666666;">-->
+        <!--更多精彩测评戳这里-->
+
+      <!--</p>-->
 
       <div style="flex: 6;"></div>
 
