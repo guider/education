@@ -25,7 +25,7 @@
     <div
       v-if="state===1"
       class="container" style="flex-direction: column;z-index: 100;position: absolute;">
-      <p style="margin-top: 30px;width: 150px;height: 36px;background-color: #d0dbed;border-radius: 15px;
+      <p style="margin-top: 30px;width: 150px;height: 36px;background-color: #d0dbed;border-radius: 18px;
       font-weight: bold;
       font-size: 18px;color: #333;display: flex;justify-content: center;align-items: center;">第&nbsp;{{selectedIndex+1}}&nbsp;题</p>
       <p class="desc" style="margin-top:40px; font-size: 17px;">
@@ -36,29 +36,30 @@
         <p
           @click="doAnswer(itemObj,index)"
           style="margin-left: 30px;margin-right: 20px;align-items: center;display: flex;height: 50px;">
-          {{index==0?'A':(index==1?'B':'C')}}&nbsp;{{itemObj}} </p>
+          {{index===0?'A':(index===1?'B':'C')}}&nbsp;{{itemObj}} </p>
       </div>
 
     </div>
 
     <div
-      v-if="state===3"
-      class="container" style="flex-direction: column;z-index: 100;position: absolute;">
+      v-if="state===2"
+      class="container" style="flex-direction: column;z-index: 100;position: absolute;"
 
+    >
+      <div
+        style="width: 70%;height: 100%;background-repeat: no-repeat;background-size: 100%;margin-top: 50px;"
+        :style="{backgroundImage:'url('+require('../../../assets/image/截图分享朋友圈@2x.png')+')'}"
+      ></div>
     </div>
 
 
     <div
-      v-if="state===2"
+      v-if="state===3"
       class="container" style="flex-direction: column;z-index: 100;position: absolute;">
       <p class="title">你的最终得分</p>
-      <p class="title" style="font-size: 50px;margin-top: 0;">90</p>
+      <p class="title" style="font-size: 50px;margin-top: 0;">{{result.score}}</p>
       <p class="desc" style="font-size: 15px;margin-top: 0px;">
-        在我们家长的心中，总是认为让孩子吃最好的，<br>
-        穿最好的，有房住，有车坐，这些才是最重要的。<br>
-        但是这真的是孩子最需要的吗？<br>
-        孩子心中合格父母的标准又是怎样的呢？<br>
-        快来测一测，你是不是孩子心中的合格父母吧！<br>
+        {{result.comment}}
       </p>
     </div>
 
@@ -73,7 +74,15 @@
         state: 0,
         selectedIndex: 0,
         answers: [],
-        questions: require('./json/test_dad_mom_json').default
+        questions: require('./json/test_dad_mom_json').default,
+        result: {
+          score: 0,
+          comment: '',
+          comments:
+            ['恭喜你，你已经超越合格，成为了优秀的父母，看来你在教育孩子方面很有心得～关注公众号，我们有更多分享哦',
+            '恭喜你，你是合格的父母啦～你有成为优秀父母的潜质哦～关注公众号，我们有更多关于孩子的分享哦',
+            'Sorry,你是不合格的父母哦～看来你需要多多努力啦。关注公众号，我们有更多关于孩子的的分享哦～']
+        }
       }
     },
     methods: {
@@ -85,8 +94,13 @@
           this.answers[this.selectedIndex] = index;
           if (this.selectedIndex < 9) {
             this.selectedIndex++;
-          }else {
-            this.state=2;
+          } else {
+            this.state = 2;
+            this.answers.forEach((item) => {
+              this.result.score += Math.floor(10 / (parseInt(item) + 1))
+            });
+            let index = (Math.floor(this.result.score / 80)) ? 0 : ((Math.floor(this.result.score / 60)) ? 1 : 2);
+            this.result.comment = this.result.comments[index];
           }
         }
       }
@@ -98,6 +112,9 @@
     },
     mounted() {
       this.$refs.box.style.paddingBottom = 0;
+      this.wxShare(this.$wechat, location.href, () => {
+        this.state = 3;
+      });
     }
   }
 </script>
@@ -119,7 +136,7 @@
 
   .title {
     font-family: fztcghjw;
-    font-size: 33px;
+    font-size: 30px;
     margin-top: 30px;
     color: #4e5d75;
   }

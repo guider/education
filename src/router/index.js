@@ -6,12 +6,13 @@ import Result from '../pages/activity/test/Result.vue'
 import Letters from '../pages/activity/edu_resource/Letters.vue'
 import Letter from '../pages/letter/Letter.vue'
 import TestDadMom from '../pages/activity/test_dad_mom/TestDadMom.vue'
+import TestReliableParents from '../pages/activity/test_reliable_parents/TestReliableParents.vue'
 
 Vue.use(Router)
 
 export default new Router({
   mode: 'history',
-  base: '/',
+  base: '/edu',
   saveScrollPosition: true,
   routes: [
     {
@@ -58,11 +59,23 @@ export default new Router({
       }
     }, {
       path: '/test_dad_mom',
-      name: '读音',
+      name: '测试',
       component: TestDadMom,
       meta: {
         navHidden: true,
       }
+    },
+    {
+      path: '/test_reliable_parents',
+      name: '测试',
+      component: TestReliableParents,
+      meta: {
+        navHidden: true,
+      }
     }
+    // , {
+    //   path: '*',
+    //   redirect:'/splash'
+    // }
   ]
 })
