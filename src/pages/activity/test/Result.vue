@@ -1,5 +1,7 @@
 <template>
-  <div ref="container" style="width: 100%;height: 100%;position: static">
+  <div ref="container" style="width: 100%;height: 100%;position: static;background-size: 100%;"
+       :style="{backgroundImage:'url('+require('../../../assets/image/icon/智力测试题背景2.jpg')+')'}"
+  >
     <div class="container" style="height: 100%;">
       <div style="flex: 14;"></div>
       <p class="title">
@@ -142,12 +144,12 @@
   .container {
     width: 100%;
     height: 100%;
-    background-size: 100%;
     display: flex;
     align-items: center;
     align-self: center;;
     flex-direction: column;
-    background-image: url("../../../assets/image/icon/智力测试题背景2.jpg");
+    background-size: 100%;
+
   }
 
   .desc {

@@ -1,5 +1,7 @@
 <template>
-  <div class="container" ref="container">
+  <div class="container" ref="container"
+       :style="{backgroundImage:'url('+require('../../../assets/image/icon/智力测试题背景.jpg')+')'}"
+  >
 
     <p
       style="font-family:fztcghjw; margin-top: 16vw;font-size: 14px;font-weight: normal;font-stretch: normal;line-height: 7px;letter-spacing: 0px;color: #072d5d;"
@@ -88,7 +90,6 @@
     align-items: center;
     align-self: center;;
     flex-direction: column;
-    background-image: url("../../../assets/image/icon/智力测试题背景.jpg");
   }
 
   .title {
