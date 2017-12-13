@@ -38,7 +38,7 @@
 
       <div
         style="width: calc(100vw - 14px);height: 7px;margin-top: 23px;"
-        :style="{backgroundImage:'url('+require('../../../assets/image/test_reliable_parents/背景@2x.png')+')',backgroundPosition:(50*index+'%')+ ' 0%'  }"></div>
+        :style="{backgroundImage:'url('+require('../../../assets/image/test_reliable_parents/背景@2x.png')+')'}"></div>
 
       <p class="desc" style="margin-top:40px; font-size: 17px;margin-bottom: 35px;">
         {{item.question}}
@@ -50,7 +50,7 @@
             style="justify-content: center;display: flex;height: 100%;
 
         background-repeat: no-repeat; background-size: 300%"
-            :style="{backgroundImage:'url('+require('../../../assets/image/test_reliable_parents/test'+selectedIndex+'.jpg')+')',backgroundPosition:(50*index+'%')+ ' 0%'  }"
+            :style="{backgroundImage:'url('+require('../../../assets/image/test_reliable_parents/test_'+selectedIndex+'.jpg')+')',backgroundPosition:(50*index+'%')+ ' 0%'  }"
           >
             <p style="margin-top: 30px;color: #262626;font-size: 20px;font-family: fztcghjw;">
               {{index===0?'A':(index===1?'B':'C')}}
@@ -79,10 +79,10 @@
       class="container border" style="flex-direction: column;z-index: 100;position: absolute;">
       <p class="title">你的最终得分</p>
       <p class="title" style="font-size: 50px;margin-top: 0;">{{result.score}}</p>
-      <p class="desc" style="font-size: 15px;margin-top: 0px;">
+      <p class="desc" style="font-size: 17px;margin-top: 0px;">
         {{result.comment}}
       </p>
-      <div style="flex: 10;"></div>
+      <div style="flex: 6;"></div>
       <img style="	width: 115px;height: 115px;"
            src="../../../assets/image/icon/qrcode.jpg"/>
       <div style="flex: 1;"></div>
@@ -91,7 +91,7 @@
           关注公众号:
         </li>
         <li>
-          1.回复"合格"测试是不是合格的爸妈
+          1.回复"合格"测试你是不是合格的爸妈
         </li>
         <li>
           2.回复"逻辑"测试孩子的逻辑推理能力
@@ -149,7 +149,9 @@
     mounted() {
       this.$refs.box.style.paddingBottom = 0;
       this.wxShare(this.$wechat, location.href, () => {
-        this.state = 3;
+        if (this.state === 2) {
+          this.state = 3;
+        }
       });
     }
   }

@@ -53,7 +53,7 @@ router.beforeEach((to, from, next) => {
   console.log(to);
   if(to.name === 'level'||to.name==='result'){
     if(to.query&&to.query.from){
-      next('/splash')
+      next('/splash?type=logic')
     }
   }
 

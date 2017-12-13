@@ -58,20 +58,20 @@
       class="container" style="flex-direction: column;z-index: 100;position: absolute;">
       <p class="title">你的最终得分</p>
       <p class="title" style="font-size: 50px;margin-top: 0;">{{result.score}}</p>
-      <p class="desc" style="font-size: 15px;margin-top: 0px;">
+      <p class="desc" style="font-size: 17px;margin-top: 0px;">
         {{result.comment}}
       </p>
 
-      <div style="flex: 10;"></div>
+      <div style="flex:5;"></div>
       <img style="	width: 115px;height: 115px;"
            src="../../../assets/image/icon/qrcode.jpg"/>
       <div style="flex: 1;"></div>
       <ul style="list-style: none;">
-        <li >
+        <li>
           关注公众号:
         </li>
         <li>
-          1.回复"靠谱"测试是不是靠谱家长
+          1.回复"靠谱"测试你是不是靠谱家长
         </li>
         <li>
           2.回复"逻辑"测试孩子的逻辑推理能力
@@ -97,8 +97,8 @@
           comment: '',
           comments:
             ['恭喜你，你已经超越合格，成为了优秀的父母，看来你在教育孩子方面很有心得～关注公众号，我们有更多分享哦',
-            '恭喜你，你是合格的父母啦～你有成为优秀父母的潜质哦～关注公众号，我们有更多关于孩子的分享哦',
-            'Sorry,你是不合格的父母哦～看来你需要多多努力啦。关注公众号，我们有更多关于孩子的的分享哦～']
+              '恭喜你，你是合格的父母啦～你有成为优秀父母的潜质哦～关注公众号，我们有更多关于孩子的分享哦',
+              'Sorry,你是不合格的父母哦～看来你需要多多努力啦。关注公众号，我们有更多关于孩子的的分享哦～']
         }
       }
     },
@@ -130,7 +130,9 @@
     mounted() {
       this.$refs.box.style.paddingBottom = 0;
       this.wxShare(this.$wechat, location.href, () => {
-        this.state = 3;
+        if (this.state === 2) {
+          this.state = 3;
+        }
       });
     }
   }
