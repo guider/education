@@ -27,8 +27,8 @@ Vue.config.productionTip = true;
 // 省略...
 router.afterEach(route => {
   // 从路由的元信息中获取 title 属性
-  if (route.name) {
-    document.title = route.name
+  if ((route.meta && route.meta.title) || route.name) {
+    document.title = (route.meta && route.meta.title) ? route.meta.title : route.name;
     // 如果是 iOS 设备，则使用如下 hack 的写法实现页面标题的更新
     if (navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)) {
       const hackIframe = document.createElement('iframe')
@@ -49,6 +49,14 @@ router.beforeEach((to, from, next) => {
   //   window.location.href = 'http://www.baidu.com';
   //   return;
   // }
+
+  console.log(to);
+  if(to.name === 'level'||to.name==='result'){
+    if(to.query&&to.query.from){
+      next('/splash')
+    }
+  }
+
   next()
 });
 
@@ -58,15 +66,8 @@ router.beforeEach((to, from, next) => {
 //设置微信分享全局函数
 const http = axios;
 Vue.prototype.wxShare = function (wx, url, calllback) {
-
-  if (url.lastIndexOf('?') !== -1) {
-    url = url + '&type=question'
-
-  } else {
-
-  }
   let originUrl = url;
-  url = 'http://service.wx.prguanjia.com/share/setShareData?url=' + url;
+  url = 'http://service.wx.prguanjia.com/share/setShareData?url=' + encodeURIComponent(url);
   // this.$wechat,title, desc, link, shareimg,
 
   http.get(url).then(res => {// 获得签名配置

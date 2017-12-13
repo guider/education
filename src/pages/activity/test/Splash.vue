@@ -58,7 +58,7 @@
 
       },
       level() {
-        this.$router.push({path: '/level', query: {level: (this.selectIndex * 1 + 1)}});
+        this.$router.push({name: 'level',query:{type:'logic',id:'no1'}, params: {level: (this.selectIndex * 1 + 1)}});
       },
       choiceLevel() {
         this.$refs.pop.show();

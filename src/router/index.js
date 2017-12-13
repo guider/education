@@ -20,9 +20,10 @@ export default new Router({
       redirect: '/splash'
     }, {
       path: '/level',
-      name: '测试',
+      name: 'level',
       component: TestHome,
       meta: {
+        title:'测试',
         navHidden: true,
       }
     }, {
@@ -34,9 +35,10 @@ export default new Router({
       }
     }, {
       path: '/result',
-      name: '评分',
+      name: 'result',
       component: Result,
       meta: {
+        title:'分数',
         navHidden: true,
       }
     }, {

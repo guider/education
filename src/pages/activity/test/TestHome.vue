@@ -51,7 +51,7 @@
         } else {
           this.answer[this.selectedIndex] = index;
           this.selectedIndex++;
-          this.$router.push({path: '/result', query: {level: this.level, answer: this.answer}})
+          this.$router.push({name: 'result',query:{type:'logic',id:'no1'},params: {level: this.level, answer: this.answer}})
         }
       },
       onBackClick() {
@@ -68,7 +68,7 @@
         return require('../../../assets/image/level' + this.level + '/图片' + (this.selectedIndex + 1) + '.png');
       },
       level() {
-        return (this.$route.query && this.$route.query.level ) ? this.$route.query.level : 1;
+        return (this.$route.params && this.$route.params.level ) ? this.$route.params.level : 1;
       }
     },
     mounted() {

@@ -1,6 +1,6 @@
 <template>
   <div ref="container" style="width: 100%;height: 100%;position: static">
-    <div class="container"   style="height: 100%;">
+    <div class="container" style="height: 100%;">
       <div style="flex: 14;"></div>
       <p class="title">
         恭喜你，答对{{score}}道题!
@@ -21,11 +21,11 @@
 
 
       <div style="flex: 5;"></div>
-      <img style="	width: 115px;height: 115px;"
-           src="../../../assets/image/icon/qrcode.jpg"/>
+      <img style="	width: 115px;height: 115px;opacity: 1;" src="../../../assets/image/icon/qrcode.jpg"/>
+
       <div style="flex: 1;"></div>
       <ul style="list-style: none;">
-        <li >
+        <li>
           关注公众号:
         </li>
         <li>
@@ -38,18 +38,18 @@
       <div style="flex: 1;"></div>
 
       <!--<img style="	width: 115px;height: 115px;"-->
-           <!--src="../../../assets/image/icon/qrcode.jpg"/>-->
+      <!--src="../../../assets/image/icon/qrcode.jpg"/>-->
       <!--<p-->
-        <!--style="	font-size: 14px; line-height: 20px; margin: -5px;-->
-         <!--font-weight: normal;	font-stretch: normal;	letter-spacing: 0px;color: #666666;">-->
-        <!--更多精彩测评戳这里-->
+      <!--style="	font-size: 14px; line-height: 20px; margin: -5px;-->
+      <!--font-weight: normal;	font-stretch: normal;	letter-spacing: 0px;color: #666666;">-->
+      <!--更多精彩测评戳这里-->
 
       <!--</p>-->
 
       <div style="flex: 6;"></div>
 
     </div>
-    <div v-show="showShare"
+    <div v-if="showShare"
          style="position: absolute;width: 100%;height: 100%;background-color: rgba(0,0,0,0.7);top: 0;right: 0"
          @click="hideShare">
       <div
@@ -62,7 +62,6 @@
         </div>
       </div>
     </div>
-
   </div>
 
 </template>
@@ -94,7 +93,13 @@
     },
     methods: {
       newLevel() {
-        this.$router.push('/level/' + (1 * this.$route.query.level + 1))
+        if (this.$route.params.level < 6) {
+          this.$router.push({
+            name: 'level',
+            query: {type: 'logic', id: 'no1'},
+            params: {level: (1 * this.$route.params.level + 1)}
+          })
+        }
       },
       share() {
         this.showShare = true;
@@ -102,148 +107,33 @@
       hideShare() {
         this.showShare = false;
       },
-      getConfig() {
-        let self = this;
-        let url = window.location.href.split('#')[0];
-        let paramUrl =navigator.userAgent.indexOf('iPhone')!== -1 ? 'http://localhost.com/home' : url;
-        rest.post('/wxapi/base/getWxConfig', { 'url': paramUrl })
-          .then(function(response) {
-            let res = response.data.data;
-            self.wxInit(res);
-          })
-      },
-      wxInit(res) {
-        let links = 'http://分享跳转地址';
-        let linkUrl = 'http://微信以外的跳转地址/static/shareqq.html'; // 微信以外的
-        let title = '名字';
-        let desc = '简介.';
-        let imgUrl = '分享图标/sharelogo.png';
-        wx.config({
-          debug: false,
-          appId: res.appId,
-          timestamp: res.timestamp,
-          nonceStr: res.nonceStr,
-          signature: res.signature,
-          jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone']
-        });
-        wx.ready(function() {
-          wx.onMenuShareTimeline({
-            title: title, // 分享标题
-            desc: desc, // 分享描述
-            link: linkUrl, // 分享链接
-            imgUrl: imgUrl, // 分享图标
-            success: function() {
-              // alert("分享到朋友圈成功")
-              Toast({
-                message: "成功分享到朋友圈"
-              });
-            },
-            cancel: function() {
-              // alert("分享失败,您取消了分享!")
-              Toast({
-                message: "分享失败,您取消了分享!"
-              });
-            }
-          });
-          //微信分享菜单测试
-          wx.onMenuShareAppMessage({
-            title: title, // 分享标题
-            desc: desc, // 分享描述
-            link: links, // 分享链接
-            imgUrl: imgUrl, // 分享图标
-            success: function() {
-              // alert("成功分享给朋友")
-              Toast({
-                message: "成功分享给朋友"
-              });
-            },
-            cancel: function() {
-              // alert("分享失败,您取消了分享!")
-              Toast({
-                message: "分享失败,您取消了分享!"
-              });
-            }
-          });
-          wx.onMenuShareQQ({
-            title: title, // 分享标题
-            desc: desc, // 分享描述
-            link: linkUrl, // 分享链接
-            imgUrl: imgUrl, // 分享图标
-            success: function() {
-              // alert("成功分享给QQ")
-              Toast({
-                message: "成功分享到QQ"
-              });
-            },
-            cancel: function() {
-              // alert("分享失败,您取消了分享!")
-              Toast({
-                message: "分享失败,您取消了分享!"
-              });
-            }
-          });
-          wx.onMenuShareWeibo({
-            title: title, // 分享标题
-            desc: desc, // 分享描述
-            link: linkUrl, // 分享链接
-            imgUrl: imgUrl, // 分享图标
-            success: function() {
-              // alert("成功分享给朋友")
-              Toast({
-                message: "成功分享到腾讯微博"
-              });
-            },
-            cancel: function() {
-              // alert("分享失败,您取消了分享!")
-              Toast({
-                message: "分享失败,您取消了分享!"
-              });
-            }
-          });
-          wx.onMenuShareQZone({
-            title: title, // 分享标题
-            desc: desc, // 分享描述
-            link: linkUrl, // 分享链接
-            imgUrl: imgUrl, // 分享图标
-            success: function() {
-              // alert("成功分享给朋友")
-              Toast({
-                message: "成功分享到QQ空间"
-              });
-            },
-            cancel: function() {
-              // alert("分享失败,您取消了分享!")
-              Toast({
-                message: "分享失败,您取消了分享!"
-              });
-            }
-          });
-        });
-        wx.error(function(err) {
-          alert(JSON.stringify(err))
-        });
-      }
-    },
+    }
+    ,
     computed: {
       resultRate() {
         return this.rate[this.score]
-      },
+      }
+      ,
       score() {
         let result = 0;
-        this.$route.query.answer.forEach((item, index) => {
-          if (item == this.resultArray[index]) {
-            result++;
-          }
-        });
+        if (this.$route.params && this.$route.params.answer) {
+          this.$route.params.answer.forEach((item, index) => {
+            if (item == this.resultArray[index]) {
+              result++;
+            }
+          });
+        }
         return result;
-      },
-      resultArray() {
-        return Array.from(require('./config/result').default[this.$route.query.level*1-1]);
       }
-    },
+      ,
+      resultArray() {
+        return Array.from(require('./config/result').default[this.$route.params.level * 1 - 1]);
+      }
+    }
+    ,
     mounted() {
       this.$refs.container.parentNode.style.paddingBottom = 0;
-      this.wxShare(this.$wechat, location.href);
+      this.wxShare(this.$wechat, (location.href.split('#')[0]));
     }
   }
 </script>

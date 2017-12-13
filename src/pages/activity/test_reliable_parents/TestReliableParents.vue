@@ -53,7 +53,7 @@
             :style="{backgroundImage:'url('+require('../../../assets/image/test_reliable_parents/test'+selectedIndex+'.jpg')+')',backgroundPosition:(50*index+'%')+ ' 0%'  }"
           >
             <p style="margin-top: 30px;color: #262626;font-size: 20px;font-family: fztcghjw;">
-            {{index===0?'A':(index===1?'B':'C')}}
+              {{index===0?'A':(index===1?'B':'C')}}
             </p>
 
           </div>
@@ -87,7 +87,7 @@
            src="../../../assets/image/icon/qrcode.jpg"/>
       <div style="flex: 1;"></div>
       <ul style="list-style: none;">
-        <li >
+        <li>
           关注公众号:
         </li>
         <li>
@@ -115,9 +115,9 @@
           score: 0,
           comment: '',
           comments:
-            ['恭喜你，你已经超越合格，成为了优秀的父母，看来你在教育孩子方面很有心得～关注公众号，我们有更多分享哦',
-              '恭喜你，你是合格的父母啦～你有成为优秀父母的潜质哦～关注公众号，我们有更多关于孩子的分享哦',
-              'Sorry,你是不合格的父母哦～看来你需要多多努力啦。关注公众号，我们有更多关于孩子的的分享哦～']
+            ['授予您“绝对靠谱父母”的荣誉称号。你是孩子成长路上的强大支柱，有了你的陪伴，孩子的成长是阳光快乐的。为你打call',
+              '授予您“一般靠谱父母”的称号。你为孩子的成长尽心尽力，为孩子遮风挡雨。你可以适当的放松下来，给孩子一些自由，这样你的孩子才会越来越优秀哦。',
+              '授予您“相当不靠谱父母”的称号。如甩手大掌柜的你，要对孩子多点关注，珍惜与孩子相处的日子，你会有很多惊喜哦。']
         }
       }
     },
