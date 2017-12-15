@@ -114,7 +114,8 @@
           } else {
             this.state = 2;
             this.answers.forEach((item) => {
-              this.result.score += Math.floor(10 / (parseInt(item) + 1))
+              this.result.score +=  item == 0 ? 4 : (item == 1 ? 6 : 10);
+                // Math.floor(10 / (parseInt(item) + 1))
             });
             let index = (Math.floor(this.result.score / 80)) ? 0 : ((Math.floor(this.result.score / 60)) ? 1 : 2);
             this.result.comment = this.result.comments[index];
@@ -150,7 +151,6 @@
   img {
     width: calc(100vw - (20px));
     height: auto;
-
   }
 
   .title {
