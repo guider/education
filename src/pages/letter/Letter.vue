@@ -1,6 +1,6 @@
 <template>
   <div class="container" ref="box">
-    <i style="background-size: 100%;height: 40px;width: 280px;margin-top: 40px;margin-bottom: 10px;"
+    <i style="height: 40px; width:280px;margin-top: 50px;margin-bottom: 10px;background-repeat: no-repeat;"
        :style="{backgroundImage: 'url('+ imgurl +')'}"></i>
     <canvas ref="stage"></canvas>
     <div style="flex: 1; width: 100%;"></div>
@@ -14,20 +14,26 @@
     </div>
     <div
       style="display: flex;flex: 1; width: 100%;height: 100px;flex-direction: row;justify-content: center;align-items: center;">
-      <img src="../../assets/image/letter/矢量智能对象@2x.png" style="width:26px;height: 26px;margin-right: 10px;" alt=" ">
+      <img
+        @click="play"
+        src="../../assets/image/letter/矢量智能对象@2x.png" style="width:26px;height: 26px;margin-right: 10px;" alt=" ">
+
+
+      <audio autoplay="autoplay" ref="audio">
+        <source :src="videoScore" type="audio/mpeg">
+        <embed height="0" width="0" :src="videoScore">
+      </audio>
       <div style="display: inline-block;font-size: 18px;color: #2c5f97;margin-right: 25px;">读音：<span
-        style="font-weight: bold">qing</span></div>
+        style="font-weight: bold">{{letterObj.chinese.pinyin}}</span></div>
       <div style="display:inline-block ;font-size: 18px;color: #2c5f97;margin-right: 25px;">部首：<span
-        style="font-weight: bold">口</span></div>
-      <div style="display:inline-block;font-size: 18px;color: #2c5f97">笔数：<span style="font-weight: bold">10</span>
+        style="font-weight: bold">{{letterObj.chinese.bushou}}</span></div>
+      <div style="display:inline-block;font-size: 18px;color: #2c5f97">笔数：<span style="font-weight: bold">{{letterObj.chinese.bihua.length}}</span>
       </div>
     </div>
-
+    <div style="flex: 1; width: 100%;"></div>
     <search
       @result-click="resultClick"
-      @on-change="getResult"
       v-model="value"
-      position="absolute"
       @on-focus="onFocus"
       :auto-fixed="false"
       @on-cancel="onCancel"
@@ -48,16 +54,30 @@
     },
     data() {
       return {
-        value: '魑',
+        value: '',
         scale: 5,
         chinese_word: '',
         content: '',
         id: '',
         imgurl: '',
-        remote_id: ''
+        remote_id: '',
+        letterObj: {
+          chinese: {
+            pinyin: '',
+            bihua: [],
+            bishun: [],
+            bushou: ''
+          }
+        }
       };
     },
     methods: {
+
+      play() {
+        console.log(this.$refs.audio);
+        this.$refs.audio.load()
+        // this.$refs.audio.play()
+      },
       setFocus() {
         this.$refs.search.setFocus()
       },
@@ -70,14 +90,7 @@
       },
       onSubmit() {
         this.$refs.search.setBlur();
-
-        // this.loadData();
-        console.log( this.$refs.stage)
-        this.$refs.stage.style.width =  0;
-        let context = this.$refs.stage.getContext('2d');
-        context.clear();
-        context.beginPath();
-        context.clearRect(0,0,this.$refs.stage.style.width,this.$refs.stage.style.height);
+        this.loadData();
       },
       onFocus() {
         console.log('on focus')
@@ -122,24 +135,24 @@
             if (tmpArr && tmpArr.length > 0) {
               let childCount = 0;
               clearInterval(self.childTimer)
-              self.childTimer = setInterval( ()=>{
+              self.childTimer = setInterval(() => {
                 let tArr = tmpArr[tmpArr.length - 1];
-                if (childCount < tArr.length / 30) {
+                if (childCount < tArr.length / 25) {
                   childCount++;
-                  let childArr = tArr.slice(0, childCount * 30);
+                  let childArr = tArr.slice(0, childCount * 25);
                   self.drawOneStroke(context, childArr);
                 } else {
                   self.drawOneStroke(context, tArr);
                   clearInterval(self.childTimer);
                   childCount = 0;
                 }
-              }, 100);
+              }, 45);
             }
           } else {
             clearInterval(self.timer);
             count = 0;
           }
-        }, 1500);
+        }, 1000);
 
       },
       loadData() {
@@ -148,43 +161,54 @@
           params: {word: this.value ? this.value : "字"}
         })
           .then(res => {
-            this.content = res.data.content;
-            this.chinese_word = res.data.chinese_word;
-            this.id = res.data.id;
-            this.imgurl = res.data.imgurl;
-            this.remote_id = res.data.remote_id;
-            // this.drawLetter();
-            this.letterObj = JSON.parse(this.content);
-            this.drawOutline(this.$refs.stage.getContext("2d"));
-            this.drawWord(this.$refs.stage.getContext("2d"));
+            if (!res.result) {
+              this.content = res.data.content;
+              this.chinese_word = res.data.chinese_word;
+              this.id = res.data.id;
+              this.imgurl = res.data.imgurl;
+              this.remote_id = res.data.remote_id;
+              this.drawLetter();
+              this.$refs.audio.load();
+            } else {
+            }
+            if (res.result) {
+              this.$vux.toast.show({type: 'text', text: res.msg})
+            }
           })
           .catch(err => {
           });
       },
       drawLetter() {
-        // if (this.timer) {
-        //   clearInterval(this.timer);
-        //   this.timer = null;
-        // }
-        // if(this.childTimer) {
-        //   clearInterval(this.childTimer);
-        //   this.childTimer= null;
-        // }
+        if (this.timer) {
+          clearInterval(this.timer);
+          this.timer = null;
+        }
+        if (this.childTimer) {
+          clearInterval(this.childTimer);
+          this.childTimer = null;
+        }
+        this.clearLetter();
+        this.letterObj = JSON.parse(this.content);
+        this.drawOutline(this.$refs.stage.getContext("2d"));
+        this.drawWord(this.$refs.stage.getContext("2d"));
+      },
+      clearLetter() {
         let context = this.$refs.stage.getContext('2d');
-        context.width=context.width;
-        // context.beginPath();
-        // context.clearRect(0,0,260,260);
-        // this.$refs.stage.clear();
-        // context.beginPath();
-        // this.letterObj = JSON.parse(this.content);
-        // this.drawOutline(this.$refs.stage.getContext("2d"));
-        // this.drawWord(this.$refs.stage.getContext("2d"));
+        context.clearRect(0, 0, 300, 300);
+        context.beginPath();
+        context.moveTo(0, 0);
       }
     },
-    computed: {},
+    computed: {
+      videoScore(){
+        return 'http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=2&text=' + this.value;
+      }
+    },
     mounted() {
       this.loadData();
       this.$refs.box.parentNode.style.paddingBottom = 0;
+      this.wxShare(this.$wechat)
+
     }
   };
 </script>
