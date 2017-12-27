@@ -7,6 +7,7 @@ import Letters from '../pages/activity/edu_resource/Letters.vue'
 import Letter from '../pages/letter/Letter.vue'
 import TestDadMom from '../pages/activity/test_dad_mom/TestDadMom.vue'
 import TestReliableParents from '../pages/activity/test_reliable_parents/TestReliableParents.vue'
+import Poster from '../pages/poster/Poster'
 
 Vue.use(Router);
 
@@ -68,6 +69,15 @@ export default new Router({
       name: '测试',
       component: TestReliableParents,
       meta: {
+        navHidden: true,
+      }
+    },
+    {
+      path: '/poster',
+      name: '海报',
+      component: Poster,
+      meta: {
+        title:' ',
         navHidden: true,
       }
     }

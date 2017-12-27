@@ -207,7 +207,7 @@
     mounted() {
       this.loadData();
       this.$refs.box.parentNode.style.paddingBottom = 0;
-      this.wxShare(this.$wechat)
+      this.wxShare(this.$wechat,location.href)
 
     }
   };
