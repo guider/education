@@ -77,7 +77,7 @@ export default new Router({
       name: '海报',
       component: Poster,
       meta: {
-        title:' ',
+        title:'详情',
         navHidden: true,
       }
     }
